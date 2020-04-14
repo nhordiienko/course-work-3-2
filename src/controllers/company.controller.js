@@ -16,7 +16,6 @@ module.exports.addNew = async (req, res, next) => {
       name: result.name,
     });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };

@@ -20,8 +20,13 @@ module.exports.addNew = async (req, res, next) => {
   }
 };
 
-module.exports.getAll = () => {
-
+module.exports.getAll = async (req, res, next) => {
+  try {
+    const result = await Company.find();
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports.getForAdmin = () => {

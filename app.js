@@ -3,6 +3,7 @@ const { json } = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const { connect } = require('mongoose');
+const companyRouter = require('./src/routers/company.router');
 require('dotenv').config();
 
 const { BD_USER, BD_PASSWORD, BD_LINK } = process.env;
@@ -19,5 +20,6 @@ const app = express();
 app.use(cors());
 app.use(json());
 app.use(morgan('dev'));
+app.use('/company', companyRouter);
 
 module.exports = { app };

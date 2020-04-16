@@ -43,10 +43,16 @@ module.exports.getAll = async (req, res, next) => {
 module.exports.get = async (req, res, next) => {
   try {
     const company = await Company.findById(req.params.id);
-    res.status(200).json({
-      company,
-      getAllQuery: `${req.protocol}://${req.get('host')}/company`,
-    });
+    if (company) {
+      res.status(200).json({
+        company,
+        getAllQuery: `${req.protocol}://${req.get('host')}/company`,
+      });
+    } else {
+      res.status(404).json({
+        error: 'no company found',
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -61,8 +67,8 @@ module.exports.delete = async (req, res, next) => {
         getAllQuery: `${req.protocol}://${req.get('host')}/company`,
       });
     } else {
-      res.status(304).json({
-        message: 'There are no companies with suck id',
+      res.status(404).json({
+        message: 'There are no companies with such id',
         getAllQuery: `${req.protocol}://${req.get('host')}/company`,
       });
     }
@@ -71,6 +77,30 @@ module.exports.delete = async (req, res, next) => {
   }
 };
 
-module.exports.update = () => {
-
+module.exports.update = async (req, res, next) => {
+  const newData = {};
+  if (req.query.name) {
+    newData.name = req.query.name;
+  }
+  if (req.query.address) {
+    newData.address = req.query.address;
+  }
+  if (req.query.occumpation) {
+    newData.occumpation = req.query.occumpation;
+  }
+  if (req.query.description) {
+    newData.description = req.query.description;
+  }
+  try {
+    const result = await Company.updateOne({ _id: req.params.id }, newData);
+    if (result.n > 0) {
+      if (result.nModified > 0) {
+        res.status(200).json({ message: 'successfully modified', getQuery: `${req.protocol}://${req.get('host')}/company/${req.params.id}` });
+      }
+      res.status(304).json({ message: 'no data to modify', getQuery: `${req.protocol}://${req.get('host')}/company/${req.params.id}` });
+    }
+    res.status(404).json({ message: 'no company found', getAllQuery: `${req.protocol}://${req.get('host')}/company` });
+  } catch (error) {
+    next(error);
+  }
 };

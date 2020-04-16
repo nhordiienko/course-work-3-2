@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Work</title>
+    <style>
+        * {
+            padding: 0;
+            bottom: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-size: 20px;
+            font-family: sans-serif;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border: 1px solid #b2b2b2;
+            border-spacing: 0;
+        }
+        td, th {
+            padding: 5px;
+            vertical-align: middle;
+            text-align: left;
+            border: 1px solid #b2b2b2;
+        }
+        li {
+            margin-left: 30px;
+        }
+        .content {
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>We Work</h1>
+        <h2>API Info</h2>
+        <div class="hr"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>PATH</th>
+                    <th>METHOD</th>
+                    <th>DESCRIPTION</th>
+                    <th>REQUEST BODY</th>
+                    <th>RESPONSE</th>
+                    <th>ERRORS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/company</td>
+                    <td>POST</td>
+                    <td>Creates new company</td>
+                    <td>{ name, address, occumpation, description }</td>
+                    <td>
+                    {
+                        companies: [<br />
+                            { name, address, occumpation, description, id },<br />
+                            getQuery,<br />
+                            addAdminQuery,<br />
+                        ]
+                    }</td>
+                    <td><ul>
+                        <li><b>400</b> - invalid parameters</li>
+                    </ul></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

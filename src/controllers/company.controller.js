@@ -22,15 +22,28 @@ module.exports.addNew = async (req, res, next) => {
 
 module.exports.getAll = async (req, res, next) => {
   try {
-    const result = await Company.find();
-    res.status(200).json(result);
+    const companies = await Company.find();
+    res.status(200).json({
+      companies: companies.map((company) => ({
+        company,
+        getQuery: `${req.protocol}://${req.get('host')}/company/${company._id}`,
+      })),
+    });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.getForAdmin = () => {
-
+module.exports.get = async (req, res, next) => {
+  try {
+    const company = await Company.findById(req.params.id);
+    res.status(200).json({
+      company,
+      getAllQuery: `${req.protocol}://${req.get('host')}/company`,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports.delete = () => {

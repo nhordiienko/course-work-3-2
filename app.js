@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { connect } = require('mongoose');
 const companyRouter = require('./src/routers/company.router');
+const indexRouter = require('./src/routers/index.router');
 const errors = require('./src/helpers/errors');
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ const app = express();
 app.use(cors());
 app.use(json());
 app.use(morgan('dev'));
+app.use('/', indexRouter);
 app.use('/company', companyRouter);
 app.use(errors);
 

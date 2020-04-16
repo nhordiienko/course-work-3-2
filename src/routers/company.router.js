@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/', controller.addNew);
 router.get('/', controller.getAll);
-router.get('/:adminId', controller.getForAdmin);
+router.get('/:id', controller.get);
 router.delete('/:id', controller.delete);
 router.patch('/:id', controller.update);
 

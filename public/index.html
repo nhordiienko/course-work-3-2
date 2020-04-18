@@ -19,6 +19,7 @@
             width: 100%;
             border: 1px solid #b2b2b2;
             border-spacing: 0;
+            font-size: 0.7em;
         }
         td, th {
             padding: 5px;
@@ -26,12 +27,35 @@
             text-align: left;
             border: 1px solid #b2b2b2;
         }
+        th {
+            text-align: center;
+        }
+        .path {
+            width: 100px;
+        }
+        .method {
+            width: 100px;
+            text-align: center;
+        }
         li {
             margin-left: 30px;
         }
         .content {
             max-width: 1000px;
             margin: 50px auto 0;
+        }
+        p span {
+            background: #f0f0f0;
+            padding: 5px;
+        }
+        .private {
+            background: #f0f0f0;
+        }
+        .section {
+            padding: 5px;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
@@ -41,11 +65,12 @@
         <h2>API Info</h2>
         <p><b>bold</b> parameter - required</p>
         <p><i>italic</i> parameter - unique</p>
+        <p><span>gray</span> row - private</p>
         <table>
             <thead>
                 <tr>
-                    <th>PATH</th>
-                    <th>METHOD</th>
+                    <th class="path">PATH</th>
+                    <th class="method">METHOD</th>
                     <th>DESCRIPTION</th>
                     <th>REQUEST BODY</th>
                     <th>RESPONSE</th>
@@ -54,8 +79,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>/company</td>
-                    <td>POST</td>
+                    <td class="section" colspan="6">COMPANY</td>
+                </tr>
+                <tr class="private">
+                    <td class="path">/company</td>
+                    <td class="method">POST</td>
                     <td>Creates new company</td>
                     <td>{ <b><i>name</i></b>, address, occumpation, description }</td>
                     <td>
@@ -73,8 +101,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>/company</td>
-                    <td>GET</td>
+                    <td class="path">/company</td>
+                    <td class="method">GET</td>
                     <td>Get information about all companies</td>
                     <td>-</td>
                     <td>
@@ -90,8 +118,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>/company/:id</td>
-                    <td>GET</td>
+                    <td class="path">/company/:id</td>
+                    <td class="method">GET</td>
                     <td>Get information about specific company</td>
                     <td>-</td>
                     <td>
@@ -106,9 +134,9 @@
                         </ul>
                     </td>
                 </tr>
-                <tr>
-                    <td>/company/:id</td>
-                    <td>DELETE</td>
+                <tr class="private">
+                    <td class="path">/company/:id</td>
+                    <td class="method">DELETE</td>
                     <td>Deletes specific company</td>
                     <td>-</td>
                     <td>
@@ -123,9 +151,9 @@
                         </ul>
                     </td>
                 </tr>
-                <tr>
-                    <td>/company/:id</td>
-                    <td>PATCH</td>
+                <tr class="private">
+                    <td class="path">/company/:id</td>
+                    <td class="method">PATCH</td>
                     <td>Updates specific company</td>
                     <td>{ name, address, occumpation, description }</td>
                     <td>

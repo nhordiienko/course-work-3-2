@@ -1,5 +1,5 @@
 const { Types } = require('mongoose');
-const Company = require('../schemas/company.schema');
+const { Company } = require('../schemas');
 
 const getAddress = (req) => `${req.protocol}://${req.get('host')}/company`;
 

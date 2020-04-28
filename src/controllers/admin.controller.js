@@ -1,3 +1,5 @@
+const Admin = require('../schemas');
+
 module.exports.get = async (req, res, next) => {
 
 };

@@ -1,6 +1,8 @@
 const { Types } = require('mongoose');
 const Company = require('../schemas/company.schema');
 
+const getAddress = (req) => `${req.protocol}://${req.get('host')}/company`;
+
 module.exports.addNew = async (req, res, next) => {
   const {
     name, address = '', occumpation = '', description = '',
@@ -18,8 +20,8 @@ module.exports.addNew = async (req, res, next) => {
     const result = await newCompany.save();
     res.status(201).json({
       company: result,
-      getAllQuery: `${req.protocol}://${req.get('host')}/company`,
-      getQuery: `${req.protocol}://${req.get('host')}/company/${result._id}`,
+      getAllQuery: getAddress(req),
+      getQuery: `${getAddress(req)}/${result._id}`,
     });
   } catch (error) {
     next(error);
@@ -32,7 +34,7 @@ module.exports.getAll = async (req, res, next) => {
     res.status(200).json({
       companies: companies.map((company) => ({
         company,
-        getQuery: `${req.protocol}://${req.get('host')}/company/${company._id}`,
+        getQuery: `${getAddress(req)}/${company._id}`,
       })),
     });
   } catch (error) {
@@ -46,7 +48,7 @@ module.exports.get = async (req, res, next) => {
     if (company) {
       res.status(200).json({
         company,
-        getAllQuery: `${req.protocol}://${req.get('host')}/company`,
+        getAllQuery: getAddress(req),
       });
     } else {
       res.status(404).json({
@@ -64,12 +66,12 @@ module.exports.delete = async (req, res, next) => {
     if (result.n > 0) {
       res.status(200).json({
         message: 'Successfully deleted',
-        getAllQuery: `${req.protocol}://${req.get('host')}/company`,
+        getAllQuery: getAddress(req),
       });
     } else {
       res.status(404).json({
         message: 'There are no companies with such id',
-        getAllQuery: `${req.protocol}://${req.get('host')}/company`,
+        getAllQuery: getAddress(req),
       });
     }
   } catch (error) {
@@ -91,15 +93,16 @@ module.exports.update = async (req, res, next) => {
   if (req.query.description) {
     newData.description = req.query.description;
   }
+  console.log(req.params.id);
   try {
     const result = await Company.updateOne({ _id: req.params.id }, newData);
     if (result.n > 0) {
       if (result.nModified > 0) {
-        res.status(200).json({ message: 'successfully modified', getQuery: `${req.protocol}://${req.get('host')}/company/${req.params.id}` });
+        res.status(200).json({ message: 'successfully modified', getQuery: `${getAddress(req)}/${req.params.id}` });
       }
-      res.status(304).json({ message: 'no data to modify', getQuery: `${req.protocol}://${req.get('host')}/company/${req.params.id}` });
+      res.status(304).json({ message: 'no data to modify', getQuery: `${getAddress(req)}/${req.params.id}` });
     }
-    res.status(404).json({ message: 'no company found', getAllQuery: `${req.protocol}://${req.get('host')}/company` });
+    res.status(404).json({ message: 'no company found', getAllQuery: getAddress(req) });
   } catch (error) {
     next(error);
   }

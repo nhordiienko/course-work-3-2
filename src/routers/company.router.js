@@ -1,12 +1,13 @@
 const { Router } = require('express');
-const controller = require('../controllers/company.controller');
+const { company } = require('../controllers');
+const { companyMiddleware: { checkName } } = require('../middleware');
 
 const router = Router();
 
-router.post('/', controller.addNew);
-router.get('/', controller.getAll);
-router.get('/:id', controller.get);
-router.delete('/:id', controller.delete);
-router.patch('/:id', controller.update);
+router.post('/', checkName(true), company.addNew);
+router.get('/', company.getAll);
+router.get('/:id', company.get);
+router.delete('/:id', company.delete);
+router.patch('/:id', checkName(false), company.update);
 
 module.exports = router;

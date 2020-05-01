@@ -93,7 +93,6 @@ module.exports.update = async (req, res, next) => {
   if (req.query.description) {
     newData.description = req.query.description;
   }
-  console.log(req.params.id);
   try {
     const result = await Company.updateOne({ _id: req.params.id }, newData);
     if (result.n > 0) {

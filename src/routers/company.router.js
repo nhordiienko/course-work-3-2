@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { company } = require('../controllers');
-const { companyMiddleware: { checkName } } = require('../middleware');
+const { company: { checkName } } = require('../middleware');
 
 const router = Router();
 

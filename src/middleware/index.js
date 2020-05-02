@@ -1,3 +1,2 @@
-const companyMiddleware = require('./company.middleware');
-
-module.exports = { companyMiddleware };
+module.exports.company = require('./company.middleware');
+module.exports.user = require('./user.middleware');

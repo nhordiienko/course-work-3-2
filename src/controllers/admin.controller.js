@@ -74,7 +74,7 @@ module.exports.update = async (req, res, next) => {
       }
       res.status(304).json({ message: 'no data to modify' });
     }
-    res.status(404).json({ message: 'no company found' });
+    res.status(404).json({ message: 'no admin found' });
   } catch (error) {
     next(error);
   }
@@ -106,7 +106,7 @@ module.exports.login = async (req, res, next) => {
     if (!admin) {
       res.status(401).json({ message: 'Auth failed' });
     } else {
-      res.status(200).json({ message: 'Auth successed', token: createToken(email) });
+      res.status(200).json({ message: 'Auth successed', token: createToken(admin._id) });
     }
   } catch (error) {
     next(error);

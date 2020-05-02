@@ -3,7 +3,12 @@ const { json } = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const { connect } = require('mongoose');
-const { company, admin, root } = require('./src/routers');
+const {
+  company,
+  admin,
+  root,
+  user,
+} = require('./src/routers');
 const errors = require('./src/helpers/errors');
 require('dotenv').config();
 
@@ -22,6 +27,7 @@ app.use(cors());
 app.use(json());
 app.use(morgan('dev'));
 app.use('/', root);
+app.use('/user', user);
 app.use('/admin', admin);
 app.use('/company', company);
 app.use(errors);

@@ -12,6 +12,7 @@ const userSchema = Schema({
     to: { type: Number },
   },
   company: { type: Schema.Types.ObjectId, ref: 'Company' },
+  team: { type: Schema.Types.ObjectId, ref: 'Team' },
 });
 
 module.exports = model('User', userSchema);

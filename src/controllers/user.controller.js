@@ -10,7 +10,7 @@ const {
 module.exports.get = async (req, res, next) => {
   try {
     const result = await User.findById(req.params.id);
-    res.status(201).json({
+    res.status(200).json({
       user: {
         _id: result._id,
         email: result.email,

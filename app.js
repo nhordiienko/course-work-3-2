@@ -8,6 +8,7 @@ const {
   admin,
   root,
   user,
+  team,
 } = require('./src/routers');
 const errors = require('./src/helpers/errors');
 require('dotenv').config();
@@ -18,7 +19,7 @@ connect(`mongodb+srv://${BD_USER}:${BD_PASSWORD}@${BD_LINK}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
-  console.log('DB connection complited successful');
+  console.log('DB connection completed successful');
 });
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(json());
 app.use(morgan('dev'));
 app.use('/', root);
 app.use('/user', user);
+app.use('/team', team);
 app.use('/admin', admin);
 app.use('/company', company);
 app.use(errors);

@@ -11,10 +11,8 @@ const {
   team,
 } = require('./src/routers');
 const errors = require('./src/helpers/errors');
-require('dotenv').config();
 
-const { BD_USER, BD_PASSWORD, BD_LINK } = process.env;
-connect(`mongodb+srv://${BD_USER}:${BD_PASSWORD}@${BD_LINK}`, {
+connect(`mongodb+srv://admin:admin@cluster0-dnfdv.mongodb.net/wework?retryWrites=true&w=majority`, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,

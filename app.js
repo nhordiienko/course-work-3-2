@@ -9,6 +9,7 @@ const {
   root,
   user,
   team,
+  iot,
 } = require('./src/routers');
 const errors = require('./src/helpers/errors');
 
@@ -30,6 +31,7 @@ app.use('/user', user);
 app.use('/team', team);
 app.use('/admin', admin);
 app.use('/company', company);
+app.use('/iot', iot);
 app.use(errors);
 
 module.exports = { app };

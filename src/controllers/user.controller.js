@@ -145,7 +145,7 @@ module.exports.login = async (req, res, next) => {
     if (!user) {
       res.status(401).json({ message: 'Auth failed' });
     } else {
-      res.status(200).json({ message: 'Auth successed', token: createToken(user._id), id: _id });
+      res.status(200).json({ message: 'Auth successed', token: createToken(user._id), id: user._id });
     }
   } catch (error) {
     next(error);

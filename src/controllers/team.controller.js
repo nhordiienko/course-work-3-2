@@ -108,3 +108,21 @@ module.exports.getByCompanyId = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.get = async (req, res, next) => {
+  try {
+    const team = await Team.findById(req.params.id);
+    res.status(200).json({ team });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.getAll = async (req, res, next) => {
+  try {
+    const teams = await Team.find();
+    res.status(200).json({ teams });
+  } catch (error) {
+    next(error);
+  }
+};

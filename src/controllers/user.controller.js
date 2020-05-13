@@ -17,6 +17,7 @@ module.exports.get = async (req, res, next) => {
         position: result.position,
         name: `${result.firstName} ${result.secondName}`,
         companyId: result.company,
+        team: result.team,
         activeHours: getActiveTimeForToday(result.activeHours),
       },
     });
@@ -144,7 +145,7 @@ module.exports.login = async (req, res, next) => {
     if (!user) {
       res.status(401).json({ message: 'Auth failed' });
     } else {
-      res.status(200).json({ message: 'Auth successed', token: createToken(user._id) });
+      res.status(200).json({ message: 'Auth successed', token: createToken(user._id), id: _id });
     }
   } catch (error) {
     next(error);

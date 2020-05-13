@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Work</title>
+    <style>
+        * {
+            padding: 0;
+            bottom: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-size: 20px;
+            font-family: sans-serif;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border: 1px solid #b2b2b2;
+            border-spacing: 0;
+            font-size: 0.7em;
+        }
+        td, th {
+            padding: 5px;
+            vertical-align: middle;
+            text-align: left;
+            border: 1px solid #b2b2b2;
+        }
+        th {
+            text-align: center;
+        }
+        .path {
+            width: 100px;
+        }
+        .method {
+            width: 100px;
+            text-align: center;
+        }
+        li {
+            margin-left: 30px;
+        }
+        .content {
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+        p span {
+            background: #f0f0f0;
+            padding: 5px;
+        }
+        .private {
+            background: #f0f0f0;
+        }
+        .section {
+            padding: 5px;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>We Work</h1>
+        <h2>API Info</h2>
+        <p><b>bold</b> parameter - required</p>
+        <p><i>italic</i> parameter - unique</p>
+        <p><span>gray</span> row - private</p>
+        <table>
+            <thead>
+                <tr>
+                    <th class="path">PATH</th>
+                    <th class="method">METHOD</th>
+                    <th>DESCRIPTION</th>
+                    <th>REQUEST BODY</th>
+                    <th>RESPONSE</th>
+                    <th>ERRORS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="section" colspan="6">COMPANY</td>
+                </tr>
+                <tr class="private">
+                    <td class="path">/company</td>
+                    <td class="method">POST</td>
+                    <td>Creates new company</td>
+                    <td>{ <b><i>name</i></b>, address, occumpation, description }</td>
+                    <td>
+                        {
+                            company: { name, address, occumpation, description, id },<br />
+                            getQuery,<br />
+                            getAllQuery,<br />
+                        }
+                    </td>
+                    <td>
+                        <ul>
+                            <li><b>400</b> - invalid format or missed required parameter</li>
+                            <li><b>409</b> - unique field conflict</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="path">/company</td>
+                    <td class="method">GET</td>
+                    <td>Get information about all companies</td>
+                    <td>-</td>
+                    <td>
+                        {
+                            companies: [<br />
+                                { name, address, occumpation, description, id },<br />
+                                getQuery,<br />
+                            ]
+                        }
+                    </td>
+                    <td>
+                        -
+                    </td>
+                </tr>
+                <tr>
+                    <td class="path">/company/:id</td>
+                    <td class="method">GET</td>
+                    <td>Get information about specific company</td>
+                    <td>-</td>
+                    <td>
+                        {
+                            company: { name, address, occumpation, description, id },<br />
+                            getAllQuery,
+                        }
+                    </td>
+                    <td>
+                        <ul>
+                            <li><b>404</b> - no company found for provided id</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="private">
+                    <td class="path">/company/:id</td>
+                    <td class="method">DELETE</td>
+                    <td>Deletes specific company</td>
+                    <td>-</td>
+                    <td>
+                        {
+                            message,
+                            getAllQuery,
+                        }
+                    </td>
+                    <td>
+                        <ul>
+                            <li><b>404</b> - no company found and deleted for provided id</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="private">
+                    <td class="path">/company/:id</td>
+                    <td class="method">PATCH</td>
+                    <td>Updates specific company</td>
+                    <td>{ name, address, occumpation, description }</td>
+                    <td>
+                        {
+                            message,
+                            getQuery,
+                        }
+                    </td>
+                    <td>
+                        <ul>
+                            <li><b>404</b> - no company found and modified for provided id</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

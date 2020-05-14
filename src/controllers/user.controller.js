@@ -96,8 +96,9 @@ module.exports.updateActivity = async (req, res, next) => {
       if (result.n > 0) {
         if (result.nModified > 0) {
           res.status(200).json({ message: 'successfully modified' });
+        } else {
+          res.status(304).json({ message: 'no data to modify' });
         }
-        res.status(304).json({ message: 'no data to modify' });
       }
     }
   } catch (error) {

@@ -35,7 +35,7 @@ module.exports.addNew = async (req, res, next) => {
     firstName = '',
     secondName = '',
     position = '',
-    sick = true,
+    sick = false,
   } = req.body;
 
   const newUser = new User({

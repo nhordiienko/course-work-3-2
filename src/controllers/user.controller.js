@@ -125,6 +125,8 @@ module.exports.update = async (req, res, next) => {
   }
   try {
     const result = await User.updateOne({ _id: req.params.id }, newData);
+    console.log(await User.find({ _id: req.params.id }));
+    console.log(result);
     if (result.n > 0) {
       if (result.nModified > 0) {
         res.status(200).json({ message: 'successfully modified' });

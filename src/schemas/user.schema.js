@@ -7,6 +7,7 @@ const userSchema = Schema({
   firstName: { type: String },
   secondName: { type: String },
   position: { type: String },
+  sick: { type: Boolean },
   activeHours: {
     from: { type: Number },
     to: { type: Number },

@@ -18,6 +18,7 @@ module.exports.get = async (req, res, next) => {
         name: `${result.firstName} ${result.secondName}`,
         companyId: result.company,
         team: result.team,
+        sick: result.sick,
         activeHours: getActiveTimeForToday(result.activeHours),
       },
     });
@@ -34,6 +35,7 @@ module.exports.addNew = async (req, res, next) => {
     firstName = '',
     secondName = '',
     position = '',
+    sick = true,
   } = req.body;
 
   const newUser = new User({
@@ -44,6 +46,7 @@ module.exports.addNew = async (req, res, next) => {
     firstName,
     secondName,
     position,
+    sick,
     activeHours: {
       from: 10 * 1000 * 60 * 60,
       to: 14 * 1000 * 60 * 60,
@@ -59,6 +62,7 @@ module.exports.addNew = async (req, res, next) => {
         position: result.position,
         name: `${result.firstName} ${result.secondName}`,
         companyId: result.company,
+        sick,
         activeHours: getActiveTimeForToday(result.activeHours),
       },
     });
@@ -123,10 +127,11 @@ module.exports.update = async (req, res, next) => {
   if (req.query.password) {
     newData.password = encode(req.query.password);
   }
+  if (req.query.sick) {
+    newData.sick = req.query.sick;
+  }
   try {
     const result = await User.updateOne({ _id: req.params.id }, newData);
-    console.log(await User.find({ _id: req.params.id }));
-    console.log(result);
     if (result.n > 0) {
       if (result.nModified > 0) {
         res.status(200).json({ message: 'successfully modified' });

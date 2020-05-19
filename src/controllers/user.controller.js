@@ -96,7 +96,7 @@ module.exports.updateActivity = async (req, res, next) => {
     } else {
       const { from, to } = req.query;
       const activeHours = calculateTime(user.activeHours, { from, to });
-      const result = await User.updateOne({ _id: req.params.id }, { activeHours });
+      const result = await User.updateOne({ _id: req.params.id, sick: false }, { activeHours });
       if (result.n > 0) {
         if (result.nModified > 0) {
           res.status(200).json({ message: 'successfully modified' });
